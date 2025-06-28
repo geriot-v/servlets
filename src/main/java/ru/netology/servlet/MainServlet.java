@@ -1,23 +1,18 @@
 package ru.netology.servlet;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.netology.controller.PostController;
-import ru.netology.repository.PostRepository;
-import ru.netology.service.PostService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Component
 public class MainServlet extends HttpServlet {
+  @Autowired
   private PostController controller;
-
-  @Override
-  public void init() {
-    final var repository = new PostRepository();
-    final var service = new PostService(repository);
-    controller = new PostController(service);
-  }
 
 
   private static final String POSTS_PATH = "/api/posts";

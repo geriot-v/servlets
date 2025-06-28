@@ -4,12 +4,17 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <response-character-encoding>UTF-8</response-character-encoding>
-    <!-- определение servlet'а -->
+
     <servlet>
         <servlet-name>main</servlet-name>
         <servlet-class>ru.netology.servlet.MainServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>ru.netology.config.AppConfig</param-value>
+    </context-param>
 
     <!-- mapping - привязка к определённому URL-->
     <servlet-mapping>
