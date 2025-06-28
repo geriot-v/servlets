@@ -1,11 +1,13 @@
 package ru.netology.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.netology.model.Post;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class PostRepository {
   private final Map<Long, Post> posts = new ConcurrentHashMap<>();
   private final AtomicLong idCounter = new AtomicLong(1);
@@ -26,14 +28,12 @@ public class PostRepository {
       posts.put(newId, newPost);
       return newPost;
     } else {
-      Post existing = posts.get(id);
-      if (existing != null) {
+      if (posts.containsKey(id)) {
         Post updated = new Post(id, post.getContent());
         posts.put(id, updated);
         return updated;
-      } else {
-        throw new NoSuchElementException("Post not found with id: " + id);
       }
+      throw new NoSuchElementException("Post not found with id: " + id);
     }
   }
 
